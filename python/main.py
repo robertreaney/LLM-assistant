@@ -33,5 +33,4 @@ command= (
     "Give the python code that takes this size (100,1) numpy array named x and adds an element 1 to each row. The final matrix should be of size (100, 2) with the first column having all elements equal 1",
     )
 
-
 response = main(command)

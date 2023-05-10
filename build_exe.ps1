@@ -1,0 +1,1 @@
+pyinstaller python/ext_entrypoint.py --onefile --clean

@@ -1,6 +1,8 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import {exec} from 'child_process';
+import tempfile from 'tempfile';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -16,7 +18,38 @@ export function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('llm-assistant.generateCode', () => {
 		// The code you place here will be executed every time your command is executed
 		// Display a message box to the user
-		vscode.window.showWarningMessage('Here is some code!');
+		// vscode.window.showWarningMessage('Here is some code!');
+
+		// const text = process.env.OPEN_API_KEY;
+		
+		const editor = vscode.window.activeTextEditor;
+		if (editor) {
+			// get selected text
+
+			// TODO make this python call into an executable
+			var pythonCommand = new String("C:/Users/kayla/Documents/Rob/LLM-assistant/dist/ext_entrypoint.exe -i ");
+			const buffer = new String(' "');
+			var selectedText = new String(editor.document.getText(editor.selection));
+			const end = new String('"');
+			
+			vscode.window.showInformationMessage('Querying Model...');
+			// send selected text to python to get LLM response
+
+			exec(pythonCommand.concat(buffer.toString()).concat(selectedText.toString()).concat(end.toString()), (error, stdout, stderr) => {
+				if (error) {
+					vscode.window.showWarningMessage(error.message);
+				}
+				else if (stderr) {
+					vscode.window.showWarningMessage(stderr);
+				}
+				else {
+					editor.edit(editBuilder => {
+						editBuilder.insert(editor.selection.anchor, stdout);  // put text at active location in script
+					});
+				}
+			});
+
+		}
 	});
 	
 

@@ -29,6 +29,15 @@
 				"${workspaceFolder}/out/test/**/*.js"
 			],
 			"preLaunchTask": "${defaultBuildTask}"
-		}
+		},
+		{
+            "name": "Python Test",
+            "type": "python",
+            "request": "launch",
+            "program": "python/ext_entrypoint.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+			"args": ["-i", "Write Python code to loop from 1 to 10."]
+        }
 	]
 }
