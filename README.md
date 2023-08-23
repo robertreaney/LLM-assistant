@@ -1,1 +1,1 @@
-# LLM Assistant
+# PyGuide Language Assistant
