@@ -1,1 +1,1 @@
-from .translate import speech_to_text
+from translate import speech_to_text
