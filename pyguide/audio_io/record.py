@@ -12,7 +12,7 @@ def record_audio(output:Union[Path,str]='output.wav'):
     CHUNK = 1024
     FORMAT = pyaudio.paInt16
     CHANNELS = 1 if sys.platform == 'darwin' else 2
-    RATE = 44100
+    RATE = 16000
     RECORD_SECONDS = 30 # maximum duration
 
     # open the audio file

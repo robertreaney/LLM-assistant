@@ -1,5 +1,7 @@
 import argparse
 from pyguide.audio_io import record_audio, playback
+from pyguide import speak_input
+from pyguide.asr import speech_to_text
 
 def main():
     parser = argparse.ArgumentParser(description="A simple CLI for PyGuide Language Assistant.")
@@ -11,6 +13,12 @@ def main():
     
     playback_parser = subparsers.add_parser('play', help='Play a recording')
     playback_parser.add_argument('-f', '--file', help='File to playback from', default='output.wav')
+
+    playback_parser = subparsers.add_parser('translate', help='Automatic Speech Recognition (ASR)')
+    playback_parser.add_argument('-f', '--file', help='File to playback from', default='output.wav')
+
+    playback_parser = subparsers.add_parser('asr', help='Run interactive ASR')
+    playback_parser.add_argument('-f', '--file', help='File to playback from', default='output.wav')
     
     args = parser.parse_args()
 
@@ -18,6 +26,10 @@ def main():
         record_audio(args.file)
     elif args.subcommand == 'play':
         playback(args.file)
+    elif args.subcommand == 'translate':
+        print(speech_to_text(args.file)[0]['transcription'])
+    elif args.subcommand == 'asr':
+        speak_input(args.file)
 
 if __name__ == "__main__":
     main()

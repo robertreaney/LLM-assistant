@@ -1,0 +1,1 @@
+from .translate import speech_to_text
