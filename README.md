@@ -19,4 +19,4 @@
     terraform apply
     ```
 
-2. 
+I just wrote the terraform logic to build the image for ASR locally. I need to add in logic to push my image to ECR. Then I need to setup the fargate/api_gateway stuff to grab that image from ECR. Then create the `pyguide/asr` module to just call that fargate container. 

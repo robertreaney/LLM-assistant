@@ -28,14 +28,14 @@ resource "aws_ecr_lifecycle_policy" "ecr_lifecycle_policy" {
   })
 }
 
-# images
+# build images
 resource "docker_image" "asr" {
-  name     = "asr"
+  name     = "${aws_ecr_repository.reaney-ecr.repository_url}:latest"
   platform = "linux"
 
   build {
     context = "../services/asr"
-    tag     = ["asr:latest"]
+    tag     = ["${aws_ecr_repository.my_ecr_repo.repository_url}:latest"]
   }
 
   triggers = {
